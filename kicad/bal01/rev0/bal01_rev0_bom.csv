@@ -1,0 +1,5 @@
+﻿Designator,Footprint,Quantity,Value,LCSC Part #
+"C1, C2",0603,2,1uF,
+IC1,QFN-16,1,MA702GQ-P,
+IC2,SOT95P237X112-3N,1,TLV76033DBZR,
+X1,H5_Pads_1.27mm,1,~,
