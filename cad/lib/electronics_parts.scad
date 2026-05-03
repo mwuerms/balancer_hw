@@ -219,3 +219,8 @@ module soic8(col1 = "DarkGray", col2 = "LightGray") {
     }
 }
 soic8();
+
+module cap6_3x11mm(col = "Silver", loc_res = 32) {
+    color(col)
+    cylinder(d = 6.3, h = 11, $fn = loc_res);
+}
