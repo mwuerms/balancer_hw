@@ -36,7 +36,7 @@ module lego_axis_holder_v1_1(show = 1, loc_res = 32) {
     }
 }
 
-module magnet_holder_5mm_v1_0(loc_res = 32) {
+module magnet_holder_5mm_v1_0(show_magnet = 1, loc_res = 32) {
     difference() {
         translate([0, 0, 0])
         cylinder(d = 6, h = 4, $fn = loc_res);
@@ -48,8 +48,18 @@ module magnet_holder_5mm_v1_0(loc_res = 32) {
         // axis, 4 mm
         translate([0, 0, -1])
         cylinder(d = 4.1, h = 10, $fn = loc_res);
+        
+        // look into
+        *cube(10);
+    }
+    if(show_magnet) {
+        // magnet dia 4 x 2mm 
+        color("Silver")
+        translate([0, 0, 0])
+        cylinder(d = 4, h = 2, $fn = loc_res);
     }
 }
+magnet_holder_5mm_v1_0();
 
 module magnet_holder_8mm_6x5mm_magnet(show_magnet = 1, loc_res = 32) {
     difference() {
@@ -74,7 +84,7 @@ module magnet_holder_8mm_6x5mm_magnet(show_magnet = 1, loc_res = 32) {
         cylinder(d = 6, h = 5, $fn = loc_res);
     }
 }
-magnet_holder_8mm_6x5mm_magnet();
+*magnet_holder_8mm_6x5mm_magnet();
 
 // print
 *lego_axis_holder_v1_1(0);

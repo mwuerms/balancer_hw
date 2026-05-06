@@ -66,7 +66,7 @@ module g431b_esc1_pcb_model() {
             color("White")
             translate([0.2, 31.25, th])
             cube([2.3, 5.4, 1]);
-            // UART J?
+            // UART J3
             color("White")
             translate([3.55, 39.25, th])
             cube([9.7, 1.6, 1]);
@@ -81,7 +81,7 @@ module g431b_esc1_pcb_model() {
             color("White")
             translate([3.4, 32.3, -1])
             cube([9.5, 1.85, 1]);
-            
+
             // MCU
             color("DarkGray")
             translate([5.25, 18.95, -1])
@@ -114,7 +114,6 @@ module g431b_esc1_pcb_model() {
         cube([1.5, 2.7, th+2]);
     }
 }
-g431b_esc1_pcb_model();
 
 module g431b_esc1_simple_model() {
     th = 1.6;
@@ -122,21 +121,76 @@ module g431b_esc1_simple_model() {
     translate([-17.8, 0, -1])
     cube([17.8, 41, th+2]);
 }
-g431b_esc1_simple_model();
+*g431b_esc1_simple_model();
 
+module g431b_esc1_stlink_pcb_model(loc_res = 32) {
+    th = 1.6;
+    difference() {
+        union() {
+            // G431B_ESC1 Driver PCB
+            translate([0, 0, 0])
+            g431b_esc1_pcb_model();
+            
+            // STLINK PCB
+            color("DarkBlue")
+            translate([0, 0, 0])
+            cube([13.3, 41, th]);
+            
+            // potentiometer
+            color("Blue")
+            translate([2, 0.5, th]) {
+                translate([0, 0, 0])
+                cube([9.5, 9.5, 5]);
+                translate([9.5/2, 9.5/2, 5])
+                cylinder(d1 = 8.5, d2 = 7, h = 5, $fn = loc_res);
+            }
+            
+            // MCU
+            color("DarkGray")
+            translate([3.5, 20.0, th])
+            cube([7.1, 7.1, 1]);
+            
+            // micro USB
+            color("Silver")
+            translate([2.1, 36.8, th])
+            cube([7.5, 4.3, 2.5]);
+        }
+        // cut pcbs
+        hull() {
+            translate([0.5, -1, -1])
+            cylinder(d = 1, h = 4, $fn = loc_res);
+            translate([0.5, 17.7, -1])
+            cylinder(d = 1, h = 4, $fn = loc_res);
+        }
+        hull() {
+            translate([0.5, 23.1, -1])
+            cylinder(d = 1, h = 4, $fn = loc_res);
+            translate([0.5, 30.5, -1])
+            cylinder(d = 1, h = 4, $fn = loc_res);
+        }
+        hull() {
+            translate([0.5, 37.8, -1])
+            cylinder(d = 1, h = 4, $fn = loc_res);
+            translate([0.5, 42, -1])
+            cylinder(d = 1, h = 4, $fn = loc_res);
+        }
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+module g431b_esc1_stlink_simple_model() {
+    th = 1.6;
+    color("LightBlue") {
+        translate([-17.8, 0, -1])
+        cube([31.4, 41, th+2]);
+        
+        // potentiometer
+        translate([2.25, 0.25, th])
+        cube([10, 10, 10.5]);
+        
+        // micro USB
+        translate([2., 36.5, th])
+        cube([8, 4.6, 3]);
+    }
+}
+*g431b_esc1_stlink_pcb_model();
+*g431b_esc1_stlink_simple_model();
